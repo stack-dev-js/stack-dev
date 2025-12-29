@@ -1,4 +1,4 @@
-import { FileGeneratorImp } from '../../../file-generator/file-generator-imp';
+import { FileGeneratorImp } from '../../../../file-generator/file-generator-imp';
 
 const TSCONFIG = `{
   "extends": "@stack-dev/typescript-config/tsconfig.base.json",

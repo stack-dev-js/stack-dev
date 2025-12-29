@@ -1,8 +1,6 @@
-import { FileGeneratorImp } from '../../../file-generator/file-generator-imp';
+import { FileGeneratorImp } from '../../../../file-generator/file-generator-imp';
 
 const TSUP_CONFIG = `import { defineConfig } from 'tsup';
-
-import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -11,7 +9,7 @@ export default defineConfig({
   minify: true,
   clean: true,
   splitting: false,
-  external: ['react', 'styled-components'],
+  external: ['react', 'react-dom'],
   injectStyle: false,
 });
 `;
