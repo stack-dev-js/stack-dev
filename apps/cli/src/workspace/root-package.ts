@@ -1,24 +1,23 @@
 import { PackageJsonGenerator } from '../file-generator';
 import { FileGeneratorImp } from '../file-generator/file-generator-imp';
-import { Dependency } from '../package-json';
+import { Dependency, PackageJSON } from '../package-json';
 import { PackageGenerator } from '../utils/package-generator';
 
 export async function makeRootPackage(
   directory: string,
   name: string,
 ): Promise<PackageGenerator> {
-  const PACKAGE_JSON = new PackageJsonGenerator(
-    name,
-    [],
-    [new Dependency('turbo', '^2.5.4')],
-    {
+  const packageJsonModel = new PackageJSON({
+    name: name,
+    devDependencies: [new Dependency('turbo', '^2.5.4')],
+    additionalData: {
       description: '',
       keywords: [],
       author: '',
       license: 'ISC',
       packageManager: 'pnpm@10.13.1',
     },
-  );
+  });
 
   const PNPM_WORKSPACE = new FileGeneratorImp(
     'pnpm-workspace.yaml',
@@ -45,11 +44,11 @@ export async function makeRootPackage(
     ),
   );
 
-  return new PackageGenerator(directory, PACKAGE_JSON, [
-    PNPM_WORKSPACE,
-    GITIGNORE,
-    TURBO_JSON,
-  ]);
+  return new PackageGenerator(
+    directory,
+    new PackageJsonGenerator(packageJsonModel, ''),
+    [PNPM_WORKSPACE, GITIGNORE, TURBO_JSON],
+  );
 }
 
 const GITIGNORE_CONTENT = `# Logs

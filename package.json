@@ -6,6 +6,11 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "check-types": "turbo check-types",
+    "build": "turbo build",
+    "test": "turbo test"
+  },
   "devDependencies": {
     "turbo": "^2.5.4"
   }

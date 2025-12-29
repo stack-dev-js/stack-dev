@@ -1,5 +1,8 @@
 {
   "tasks": {
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]

@@ -1,7 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { FileGenerator } from '../file-generator/file-generator';
-import { PackageJsonGenerator } from '../file-generator/package-json-generator';
+import { FileGenerator, PackageJsonGenerator } from '../file-generator';
 
 export class PackageGenerator {
   private readonly _root: string;

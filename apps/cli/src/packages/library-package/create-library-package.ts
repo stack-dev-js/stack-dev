@@ -2,7 +2,7 @@ import { getNamespace, getWorkspaceRoot } from '../../utils/workspace';
 
 import path from 'node:path';
 import { PackageJsonGenerator } from '../../file-generator';
-import { Dependency } from '../../package-json';
+import { Dependency, PackageJSON } from '../../package-json';
 import { PackageGenerator } from '../../utils/package-generator';
 import { ADD_FILE_GENERATOR } from './files/add-file-generator';
 import { ADD_SPEC_FILE_GENERATOR } from './files/add-spec-file-generator';
@@ -12,7 +12,6 @@ import { PRETTIER_CONFIG_FILE_GENERATOR } from './files/prettier-config-file-gen
 import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
 import { TSUP_CONFIG_FILE_GENERATOR } from './files/tsup-config-file-generator';
 import { VITEST_CONFIG_FILE_GENERATOR } from './files/vitest-config-file-generator';
-
 
 export async function createLibraryPackage(name: string): Promise<void> {
   const rootDir = await getWorkspaceRoot();
@@ -25,7 +24,7 @@ export async function createLibraryPackage(name: string): Promise<void> {
 
   const generator = new PackageGenerator(
     directory,
-    makePackageGenerator(packageName),
+    makePackageGenerator(packageName, namespace),
     [
       INDEX_FILE_GENERATOR,
       ADD_FILE_GENERATOR,
@@ -43,15 +42,13 @@ export async function createLibraryPackage(name: string): Promise<void> {
   console.log(`✅ Config package created at: ${directory}`);
 }
 
-
-function makePackageGenerator(packageName: string) {
-  return new PackageJsonGenerator(
-    packageName,
-    [],
-    [
-      new Dependency('@stack-dev/eslint-config', 'workspace:*'),
-      new Dependency('@stack-dev/prettier-config', 'workspace:*'),
-      new Dependency('@stack-dev/typescript-config', 'workspace:*'),
+function makePackageGenerator(packageName: string, namespace: string) {
+  const packageJsonModel = new PackageJSON({
+    name: packageName,
+    devDependencies: [
+      new Dependency(`${namespace}/eslint-config`, 'workspace:*'),
+      new Dependency(`${namespace}/prettier-config`, 'workspace:*'),
+      new Dependency(`${namespace}/typescript-config`, 'workspace:*'),
       new Dependency('eslint', '^9.32.0'),
       new Dependency('prettier', '^3.6.2'),
       new Dependency('prettier-plugin-organize-imports', '^4.2.0'),
@@ -59,10 +56,12 @@ function makePackageGenerator(packageName: string) {
       new Dependency('vitest', '^3.2.4'),
       new Dependency('@vitest/coverage-v8', '^3.2.4'),
     ],
-    {
+    additionalData: {
+      version: '0.1.0',
+      private: true,
       main: 'dist/index.js',
-      module: 'dist/index.mjs', // For ESM consumers
-      types: 'dist/index.d.ts', // Type declarations
+      module: 'dist/index.mjs',
+      types: 'dist/index.d.ts',
       exports: {
         '.': {
           import: './dist/index.mjs',
@@ -77,7 +76,9 @@ function makePackageGenerator(packageName: string) {
         test: 'vitest run',
         'test:watch': 'vitest',
       },
-      sideEffects: false, // 🚀 Enables tree-shaking
+      sideEffects: false,
     },
-  );
+  });
+
+  return new PackageJsonGenerator(packageJsonModel, namespace);
 }

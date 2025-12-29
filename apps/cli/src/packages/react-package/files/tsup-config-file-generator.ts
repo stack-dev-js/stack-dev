@@ -2,13 +2,17 @@ import { FileGeneratorImp } from '../../../file-generator/file-generator-imp';
 
 const TSUP_CONFIG = `import { defineConfig } from 'tsup';
 
+import { defineConfig } from 'tsup';
+
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],   // Tree-shakable ESM + CommonJS for broader support
-  dts: true,                // Emit type declarations
-  sourcemap: true,
+  format: ['cjs', 'esm'],
+  dts: true,
+  minify: true,
   clean: true,
-  target: 'esnext',
+  splitting: false,
+  external: ['react', 'styled-components'],
+  injectStyle: false,
 });
 `;
 
