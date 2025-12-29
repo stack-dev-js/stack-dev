@@ -1,7 +1,14 @@
 {
   "extends": "@stack-dev/typescript-config/tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "paths": {
+      "@stack-dev/react-css": [
+        "../../packages/react-css/src/index.ts"
+      ]
+    }
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "references": []
 }

@@ -99,6 +99,9 @@ program
     const target = await getPackageByName(name);
 
     await linkPackages(current, target, development);
+
+    console.log('');
+    console.log('Run pnpm install to finish linking.');
   });
 
 program
@@ -108,7 +111,7 @@ program
   .action(async (name) => {
     name = name ?? (await promptForPackageToUnlinkFrom());
 
-    if (!isValidPackageName(name)) {
+    if (!(await isValidPackageName(name))) {
       throw new Error(`Package name "${name}" is not a valid option.`);
     }
 
