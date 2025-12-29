@@ -2,7 +2,7 @@ import { prompt } from 'enquirer';
 
 export const styleTypes = [
   'tailwind',
-  'sass',
+  'css-modules',
   'styled-components',
   'none',
 ] as const;
@@ -10,13 +10,13 @@ export const styleTypes = [
 export type StyleType = (typeof styleTypes)[number];
 
 export async function pickStyleType(
-  options: Record<string, string | undefined>,
+  options?: Record<string, string | undefined>,
 ): Promise<StyleType> {
-  if (options.type && isStyleType(options.type)) {
-    return options.type;
-  } else if (options.type && !isStyleType(options.type)) {
+  if (options?.style && isStyleType(options?.style)) {
+    return options?.style;
+  } else if (options?.style && !isStyleType(options?.style)) {
     throw new Error(
-      `--type setting "${options.type}" is invalid, must be one of ${styleTypes.join(', ')}.`,
+      `--style setting "${options.style}" is invalid, must be one of ${styleTypes.join(', ')}.`,
     );
   }
 

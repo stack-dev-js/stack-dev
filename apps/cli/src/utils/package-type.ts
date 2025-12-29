@@ -11,11 +11,11 @@ export const packageTypes = [
 export type PackageType = (typeof packageTypes)[number];
 
 export async function pickPackageType(
-  options: Record<string, string | undefined>,
+  options?: Record<string, string | undefined>,
 ): Promise<PackageType> {
-  if (options.type && isPackageType(options.type)) {
+  if (options?.type && isPackageType(options.type)) {
     return options.type;
-  } else if (options.type && !isPackageType(options.type)) {
+  } else if (options?.type && !isPackageType(options.type)) {
     throw new Error(
       `--type setting "${options.type}" is invalid, must be one of ${packageTypes.join(', ')}.`,
     );

@@ -5,7 +5,6 @@
     "stack": "./dist/index.js"
   },
   "scripts": {
-    "dev": "tsup src/index.ts --watch",
     "build": "tsup src/index.ts --dts --format esm,cjs",
     "start": "node dist/index.js",
     "check-types": "tsc --noEmit",

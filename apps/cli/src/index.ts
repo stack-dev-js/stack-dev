@@ -50,7 +50,7 @@ program
   )
   .option('--style <style>', `Styling system to use (${styleTypes.join(', ')})`)
   .action(async (name, options) => {
-    const type = await pickPackageType(options.type);
+    const type = await pickPackageType(options);
 
     // TODO: Vite, fastify.
 
@@ -62,7 +62,7 @@ program
         await createConfigPackage(name);
         break;
       case 'react':
-        await createReactPackage(name, await pickStyleType(options.style));
+        await createReactPackage(name, await pickStyleType(options));
         break;
       case 'cli':
         // await createCliPackage(name)

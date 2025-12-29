@@ -12,7 +12,7 @@ export async function createReactPackage(
     case 'tailwind':
       await createTailwindReactPackage(name);
       break;
-    case 'sass':
+    case 'css-modules':
       await createCssReactPackage(name);
       break;
     case 'styled-components':
