@@ -5,6 +5,7 @@ import { PackageGenerator } from '../../../utils/package-generator';
 import { getNamespace, getWorkspaceRoot } from '../../../utils/workspace';
 import { BUTTON_CSS_MODULE_FILE_GENERATOR } from './files/button-css-module-file-generator';
 import { BUTTON_FILE_GENERATOR } from './files/button-file-generator';
+import { BUTTON_SPEC_FILE_GENERATOR } from './files/button-spec-file-generator';
 import { ESLINT_CONFIG_FILE_GENERATOR } from './files/eslint-config-file-generator';
 import { INDEX_FILE_GENERATOR } from './files/index-file-generator';
 import { PRETTIER_CONFIG_FILE_GENERATOR } from './files/prettier-config-file-generator';
@@ -28,7 +29,7 @@ export async function createCssReactPackage(name: string): Promise<void> {
       INDEX_FILE_GENERATOR,
       BUTTON_FILE_GENERATOR,
       BUTTON_CSS_MODULE_FILE_GENERATOR,
-      BUTTON_FILE_GENERATOR,
+      BUTTON_SPEC_FILE_GENERATOR,
       TSUP_CONFIG_FILE_GENERATOR,
       TSCONFIG_FILE_GENERATOR,
       PRETTIER_CONFIG_FILE_GENERATOR,
@@ -53,15 +54,24 @@ function makePackageGenerator(packageName: string, namespace: string) {
       new Dependency(`${namespace}/eslint-config`, 'workspace:*'),
       new Dependency(`${namespace}/prettier-config`, 'workspace:*'),
       new Dependency(`${namespace}/typescript-config`, 'workspace:*'),
+      // Development React binaries
+      new Dependency('react', '^18.3.1'),
+      new Dependency('react-dom', '^18.3.1'),
       new Dependency('@types/react', '^18.3.1'),
       new Dependency('@types/react-dom', '^18.3.1'),
+      // Linting & Formatting
       new Dependency('eslint', '^9.32.0'),
       new Dependency('prettier', '^3.6.2'),
       new Dependency('prettier-plugin-organize-imports', '^4.2.0'),
-      new Dependency('tsup', '^7.3.0'),
+      // Build
+      new Dependency('tsup', '^8.0.0'),
+      new Dependency('postcss', '^8.4.0'),
+      // Testing
       new Dependency('vitest', '^3.2.4'),
       new Dependency('@vitest/coverage-v8', '^3.2.4'),
-      new Dependency('postcss', '^8.4.0'),
+      new Dependency('@testing-library/react', '^16.0.0'),
+      new Dependency('@testing-library/jest-dom', '^6.0.0'),
+      new Dependency('jsdom', '^25.0.0'),
     ],
     additionalData: {
       version: '0.1.0',
@@ -75,19 +85,16 @@ function makePackageGenerator(packageName: string, namespace: string) {
           require: './dist/index.js',
           types: './dist/index.d.ts',
         },
-        // CSS Modules require exporting the generated CSS file
         './index.css': './dist/index.css',
       },
       scripts: {
         build: 'tsup',
-        lint: 'eslint',
+        lint: 'eslint .',
         format: 'prettier . --write',
         test: 'vitest run',
         'test:watch': 'vitest',
       },
-      sideEffects: [
-        '**/*.css', // Prevents bundlers from tree-shaking the CSS away
-      ],
+      sideEffects: ['**/*.css'],
     },
   });
 

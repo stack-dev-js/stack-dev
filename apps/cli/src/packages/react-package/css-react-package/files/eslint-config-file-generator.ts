@@ -1,8 +1,15 @@
 import { FileGeneratorImp } from '../../../../file-generator/file-generator-imp';
 
 const ESLINT_CONFIG = `import base from '@stack-dev/eslint-config/base.mjs';
+import react from '@stack-dev/eslint-config/react.mjs';
 
-export default [...base, { ignores: ['**/dist/**'] }];
+export default [
+  ...base,
+  ...react,
+  { 
+    ignores: ['**/dist/**', '**/coverage/**'] 
+  }
+];
 `;
 
 export const ESLINT_CONFIG_FILE_GENERATOR = new FileGeneratorImp(

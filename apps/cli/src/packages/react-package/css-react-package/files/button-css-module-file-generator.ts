@@ -11,6 +11,6 @@ const BUTTON_CSS_MODULE = `.styledButton {
 `;
 
 export const BUTTON_CSS_MODULE_FILE_GENERATOR = new FileGeneratorImp(
-  'button.module.css',
+  'src/button.module.css',
   BUTTON_CSS_MODULE,
 );

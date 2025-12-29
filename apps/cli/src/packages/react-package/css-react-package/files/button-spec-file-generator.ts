@@ -27,7 +27,7 @@ describe('Button', () => {
 });
 `;
 
-export const BUTTON_SPEC_GENERATOR = new FileGeneratorImp(
-  'button.spec.tsx',
+export const BUTTON_SPEC_FILE_GENERATOR = new FileGeneratorImp(
+  'src/button.spec.tsx',
   BUTTON_SPEC,
 );
