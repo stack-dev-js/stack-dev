@@ -4,8 +4,10 @@ export const packageTypes = [
   'library',
   'config',
   'react',
-  'cli',
+  'vite',
+  'fastify',
   'next',
+  'cli',
 ] as const;
 
 export type PackageType = (typeof packageTypes)[number];

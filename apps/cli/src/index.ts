@@ -15,6 +15,7 @@ import { pickStyleType, styleTypes } from './utils/style-type';
 import { Command } from 'commander';
 import { prompt } from 'enquirer';
 import { linkPackages } from './link-packages';
+import { createViteReactApp } from './packages/vite-react-app/create-vite-react-app';
 import { unlinkPackages } from './unlink-packages';
 import { getDirectoryPackageJson } from './utils/utils';
 import { getNamespace } from './utils/workspace';
@@ -52,8 +53,6 @@ program
   .action(async (name, options) => {
     const type = await pickPackageType(options);
 
-    // TODO: Vite, fastify.
-
     switch (type) {
       case 'library':
         await createLibraryPackage(name);
@@ -64,8 +63,14 @@ program
       case 'react':
         await createReactPackage(name, await pickStyleType(options));
         break;
+      case 'vite':
+        await createViteReactApp(name);
+        break;
       case 'cli':
         // await createCliPackage(name)
+        break;
+      case 'fastify':
+        // await createFastifyApp(name)
         break;
       case 'next':
         // await createNextPackage(name)
