@@ -9,6 +9,7 @@ export type ConstructorArgs = {
   name: string;
   dependencies?: ReadonlyArray<Dependency>;
   devDependencies?: ReadonlyArray<Dependency>;
+  peerDependencies?: ReadonlyArray<Dependency>;
   additionalData?: Snapshot;
 };
 
@@ -19,12 +20,15 @@ export class PackageJSON implements Equalable {
 
   private readonly _devDependencies: ReadonlyArray<Dependency>;
 
+  private readonly _peerDependencies: ReadonlyArray<Dependency>;
+
   private readonly _additionalData: Snapshot;
 
   public constructor(args: ConstructorArgs) {
     this._name = args.name;
     this._dependencies = args.dependencies ?? [];
     this._devDependencies = args.devDependencies ?? [];
+    this._peerDependencies = args.peerDependencies ?? [];
     this._additionalData = args.additionalData ?? {};
   }
 
@@ -38,6 +42,10 @@ export class PackageJSON implements Equalable {
 
   public get devDependencies(): ReadonlyArray<Dependency> {
     return this._devDependencies;
+  }
+
+  public get peerDependencies(): ReadonlyArray<Dependency> {
+    return this._peerDependencies;
   }
 
   public addDependency(dependency: Dependency): PackageJSON {
@@ -58,6 +66,16 @@ export class PackageJSON implements Equalable {
     });
   }
 
+  public addPeerDependency(dependency: Dependency): PackageJSON {
+    return new PackageJSON({
+      name: this.name,
+      dependencies: this.dependencies,
+      devDependencies: this.devDependencies,
+      peerDependencies: [...this.peerDependencies, dependency],
+      additionalData: this._additionalData,
+    })
+  }
+
   public removeDependency(name: string): PackageJSON {
     return new PackageJSON({
       name: this.name,
@@ -76,22 +94,35 @@ export class PackageJSON implements Equalable {
     });
   }
 
+  public removePeerDependency(name: string): PackageJSON {
+    return new PackageJSON({
+      name: this.name,
+      dependencies: this.dependencies,
+      devDependencies: this.devDependencies,
+      peerDependencies: this.peerDependencies.filter((d) => d.name !== name),
+      additionalData: this._additionalData,
+    });
+  }
+
   public static parse(s: string): PackageJSON {
     const json = JSON5.parse(s);
 
     const name = json.name;
     const dependencies = PackageJSON.parseDependencies(json);
     const devDependencies = PackageJSON.parseDevDependencies(json);
+    const peerDependencies = PackageJSON.parsePeerDependencies(json);
 
     const additionalData = { ...json };
     delete additionalData['name'];
     delete additionalData['dependencies'];
     delete additionalData['devDependencies'];
+    delete additionalData['peerDependencies'];
 
     return new PackageJSON({
       name,
       dependencies,
       devDependencies,
+      peerDependencies,
       additionalData,
     });
   }
@@ -116,17 +147,28 @@ export class PackageJSON implements Equalable {
     }
   }
 
+  private static parsePeerDependencies(json: Snapshot) {
+    if ('peerDependencies' in json && typeof json.peerDependencies === 'object') {
+      return Object.entries(json.peerDependencies).map(
+        ([name, version]) => new Dependency(name, version as string),
+      );
+    } else {
+      return [];
+    }
+  }
+
   public format(namespace: string): string {
     const json = {
       name: this._name,
       dependencies: makeDependencyObject(this._dependencies, namespace),
       devDependencies: makeDependencyObject(this._devDependencies, namespace),
+      peerDependencies: makeDependencyObject(this._peerDependencies, namespace),
       ...this._additionalData,
     };
 
-    const orederd = sortKeys(json, comparePackageJSONKeys);
+    const ordered = sortKeys(json, comparePackageJSONKeys);
 
-    return JSON.stringify(orederd, null, 2);
+    return JSON.stringify(ordered, null, 2);
   }
 
   public equals(other: unknown): boolean {
@@ -143,10 +185,17 @@ export class PackageJSON implements Equalable {
         (d1, d2) => d1.equals(d2),
       );
 
+      const samePeerDependencies = haveSameItems(
+        this._peerDependencies,
+        other._peerDependencies,
+        (d1, d2) => d1.equals(d2),
+      )
+
       return (
         this._name === other._name &&
         sameDependencies &&
         sameDevDependencies &&
+        samePeerDependencies &&
         isEqual(this._additionalData, other._additionalData)
       );
     } else {
@@ -212,6 +261,8 @@ function getKeyIndex(s: string): number {
       return 9;
     case 'devDependencies':
       return 10;
+    case 'peerdependencies':
+      return 11;
     default:
       return Number.MAX_VALUE;
   }
