@@ -33,7 +33,7 @@ jobs:
         uses: changesets/action@v1
         with:
           # This runs pnpm publish -r under the hood
-          publish: pnpm changeset publish
+          publish: pnpm changeset publish --access public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
