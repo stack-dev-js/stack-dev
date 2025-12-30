@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2024",
+    "target": "ESNEXT",
     "module": "ESNext",
-    "lib": ["es2024"],
+    "lib": ["ESNEXT"],
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -14,5 +14,6 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "types": []
-  }
+  },
+  "files": ["global.d.ts"]
 }

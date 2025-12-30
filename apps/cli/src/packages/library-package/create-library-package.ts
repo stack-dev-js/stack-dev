@@ -64,6 +64,7 @@ function makePackageGenerator(packageName: string, namespace: string) {
       types: 'dist/index.d.ts',
       exports: {
         '.': {
+          development: './src/index.ts',
           import: './dist/index.mjs',
           require: './dist/index.js',
           types: './dist/index.d.ts',

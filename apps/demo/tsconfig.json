@@ -1,5 +1,5 @@
 {
-  "extends": "@stack-dev/typescript-config/tsconfig.base.json",
+  "extends": "@stack-dev/typescript-config/tsconfig.react.json",
   "compilerOptions": {
     "paths": {
       "@stack-dev/react-css": [
