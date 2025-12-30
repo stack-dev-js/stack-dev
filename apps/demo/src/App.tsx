@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Button as CssButton } from '@stack-dev/react-css';
+import { Button as StyledComponentsButton } from '@stack-dev/react-styled-components';
 
 export function App() {
   const [count, setCount] = useState(0);
@@ -36,6 +37,9 @@ export function App() {
         >
           <button onClick={handleClick}>Count is {count}</button>
           <CssButton onClick={handleClick}> Count is {count}</CssButton>
+          <StyledComponentsButton onClick={handleClick}>
+            Count is {count}
+          </StyledComponentsButton>
         </div>
       </div>
       <p>

@@ -10,6 +10,11 @@ export default defineConfig({
   clean: true,
   injectStyle: true,
   external: ['react', 'react-dom'],
+  outExtension({ format }) {
+    return {
+      js: format === 'esm' ? '.mjs' : '.js',
+    };
+  },
 });
 `;
 

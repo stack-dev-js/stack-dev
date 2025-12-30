@@ -9,4 +9,9 @@ export default defineConfig({
   splitting: false,
   external: ['react', 'react-dom'],
   injectStyle: true,
+  outExtension({ format }) {
+    return {
+      js: format === 'esm' ? '.mjs' : '.js',
+    };
+  },
 });
