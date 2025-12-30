@@ -1,7 +1,7 @@
 {
   "name": "@stack-dev/core",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@stack-dev/eslint-config": "workspace:*",
     "@stack-dev/prettier-config": "workspace:*",
