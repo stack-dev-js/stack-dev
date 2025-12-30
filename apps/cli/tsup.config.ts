@@ -8,6 +8,9 @@ export default defineConfig({
   splitting: false,
   clean: true,
   dts: true,
+  banner: {
+    js: '#!/usr/bin/env node',
+  },
   outExtension({ format }) {
     return {
       js: format === 'esm' ? '.mjs' : '.js',
