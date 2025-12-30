@@ -1,6 +1,6 @@
 {
   "name": "@stack-dev/cli",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "bin": {
     "stack": "./dist/index.js"
   },
