@@ -14,6 +14,7 @@ import { pickStyleType, styleTypes } from './utils/style-type';
 
 import { Command } from 'commander';
 import { prompt } from 'enquirer';
+import { version } from '../package.json';
 import { linkPackages } from './link-packages';
 import { createViteReactApp } from './packages/vite-react-app/create-vite-react-app';
 import { unlinkPackages } from './unlink-packages';
@@ -26,7 +27,7 @@ const program = new Command();
 program
   .name('stack')
   .description('Opinionated TypeScript workspace manager')
-  .version('0.1.0');
+  .version(version);
 
 program
   .command('create <name>')
