@@ -9,9 +9,12 @@
   "scripts": {
     "check-types": "turbo check-types",
     "build": "turbo build",
-    "test": "turbo test"
+    "test": "turbo test",
+    "sync-readme": "cp ./README.md ./apps/cli/README.md",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "turbo": "^2.5.4"
   },
   "dependencies": {
