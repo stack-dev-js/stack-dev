@@ -1,6 +1,8 @@
 import { HTMLAttributes } from 'react';
 
-import styles from './button.module.css';
+import * as styles from './button.module.css';
+
+console.log('Styles object:', styles);
 
 export function Button(props: HTMLAttributes<HTMLButtonElement>) {
   return (

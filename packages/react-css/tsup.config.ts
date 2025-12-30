@@ -8,5 +8,5 @@ export default defineConfig({
   clean: true,
   splitting: false,
   external: ['react', 'react-dom'],
-  injectStyle: false,
+  injectStyle: true,
 });

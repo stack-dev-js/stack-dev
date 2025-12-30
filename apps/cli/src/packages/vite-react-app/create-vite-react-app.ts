@@ -68,6 +68,7 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
         dev: 'vite',
         build: 'tsc && vite build',
         preview: 'vite preview',
+        start: 'pnpm run preview',
         lint: 'eslint .',
         format: 'prettier . --write',
       },

@@ -8,9 +8,8 @@ export default defineConfig({
   dts: true,
   minify: true,
   clean: true,
-  splitting: false,
+  injectStyle: true,
   external: ['react', 'react-dom'],
-  injectStyle: false,
 });
 `;
 
