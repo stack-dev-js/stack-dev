@@ -1,6 +1,6 @@
 {
   "name": "@stack-dev/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "devDependencies": {
     "@stack-dev/eslint-config": "workspace:*",
