@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch: # Allows manual triggers
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,9 +17,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install, build, and upload
-        uses: withastro/action@v3 # Official Astro Action
-        # It automatically detects npm, pnpm, or bun based on your lockfile
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4 # No version needed for pnpm 10+
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build with Turbo
+        # This builds the docs and all its local dependencies
+        run: pnpm turbo run build --filter=docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Match this to your docs output directory
+          path: ./apps/docs/dist/
 
   deploy:
     needs: build
