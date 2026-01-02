@@ -18,14 +18,16 @@ hero:
 
 import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
 
-## WIP
-- Not all environments are supported yet.
+
 
 ## Inspired by .NET Solutions
 
 Stack is an attempt to create a predictable opinionated software system. It can create backends, frontends,
 desktop apps, mobile apps, CLI apps and reusable packages that they can share. Stack comes fully ejected — you
 always own your build and configuration. Stack helps scaffold and link packages!
+
+## WIP
+- Not all environments are supported yet.
 
 ## 🛠 Supported Toolset
 
@@ -44,8 +46,8 @@ Stack comes pre-configured with a modern, high-performance stack so you can focu
     Generate shared React component libraries or full-stack Vite frontend applications instantly.
   </Card>
 
-  <Card title="Backend Ready" icon="add-document">
-    Native support for Node.js libraries, CLI tools, and **Fastify** (coming soon).
+  <Card title="Backend & CLI" icon="add-document">
+    Native support for **Fastify** APIs and robust CLI tools powered by **Commander**.
   </Card>
 </CardGrid>
 
@@ -84,14 +86,15 @@ Follow these steps to get your first Stack workspace up and running in minutes.
 
 ## 🏗 Supported Project Types
 
-Use `stack g <name>` to generate different architecture patterns:
+Use `stack g <name> --type <type>` to generate different architecture patterns:
 
 | Type     | Description |
 |----------|-------------|
 | Library  | Vanilla TypeScript package with tsup & vitest |
 | React   | Component libraries with optional Styled Components support |
 | Vite    | Full React frontend static applications |
-| Fastify | *(Coming Soon)* High-performance backend API scaffolding |
+| Fastify | High-performance Node.js backend API scaffolding |
+| CLI     | Command-line applications powered by Commander |
 
 ---
 
@@ -100,7 +103,7 @@ Use `stack g <name>` to generate different architecture patterns:
 | Command | Alias | Description |
 |--------|-------|-------------|
 | `stack create <name>` | — | Initialize a new workspace |
-| `stack g <name>` | — | Generate a new package, app, or config |
+| `stack g <name>` | — | Generate a new package (Library, React, Vite, Fastify, or CLI) |
 | `stack link [name]` | `l` | Link a local workspace package |
 | `stack unlink [name]` | `u` | Remove a local package link |
 
@@ -113,7 +116,7 @@ Stack leverages **pnpm workspaces** for maximum efficiency.
 ### Project Structure
 
 - `packages/*` — Shared libraries and configuration packages
-- `apps/*` — Deployment targets (Vite apps, CLIs, etc.)
+- `apps/*` — Deployment targets (Vite apps, Fastify APIs, CLIs)
 - `tooling/*` — Shared ESLint, Prettier, and TypeScript configs
 
 ### Common Scripts
