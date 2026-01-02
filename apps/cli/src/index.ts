@@ -1,8 +1,15 @@
+import { Command } from 'commander';
+import { prompt } from 'enquirer';
+import { version } from '../package.json';
+import { linkPackages } from './link-packages';
 import {
   createConfigPackage,
+  createFastifyApp,
   createLibraryPackage,
   createReactPackage,
+  createViteReactApp,
 } from './packages';
+import { unlinkPackages } from './unlink-packages';
 import {
   comparePackages,
   getAllPackages,
@@ -11,13 +18,6 @@ import {
 } from './utils/package';
 import { packageTypes, pickPackageType } from './utils/package-type';
 import { pickStyleType, styleTypes } from './utils/style-type';
-
-import { Command } from 'commander';
-import { prompt } from 'enquirer';
-import { version } from '../package.json';
-import { linkPackages } from './link-packages';
-import { createViteReactApp } from './packages/vite-react-app/create-vite-react-app';
-import { unlinkPackages } from './unlink-packages';
 import { getDirectoryPackageJson } from './utils/utils';
 import { getNamespace } from './utils/workspace';
 import { createWorkspace } from './workspace';
@@ -71,7 +71,7 @@ program
         // await createCliPackage(name)
         break;
       case 'fastify':
-        // await createFastifyApp(name)
+        await createFastifyApp(name);
         break;
       case 'next':
         // await createNextPackage(name)
@@ -92,7 +92,7 @@ program
 
     const development = options.dev ?? false;
 
-    if (!isValidPackageName(name)) {
+    if (!(await isValidPackageName(name))) {
       throw new Error(`Package name "${name}" is not a valid option.`);
     }
 
