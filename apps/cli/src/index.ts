@@ -3,6 +3,7 @@ import { prompt } from 'enquirer';
 import { version } from '../package.json';
 import { linkPackages } from './link-packages';
 import {
+  createCliApp,
   createConfigPackage,
   createFastifyApp,
   createLibraryPackage,
@@ -68,7 +69,7 @@ program
         await createViteReactApp(name);
         break;
       case 'cli':
-        // await createCliPackage(name)
+        await createCliApp(name);
         break;
       case 'fastify':
         await createFastifyApp(name);

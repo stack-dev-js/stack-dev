@@ -1,3 +1,4 @@
+export * from './cli-app';
 export * from './fastify-app';
 export * from './library-package';
 export * from './react-package';
