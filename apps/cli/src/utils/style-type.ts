@@ -1,11 +1,6 @@
 import { prompt } from 'enquirer';
 
-export const styleTypes = [
-  'tailwind',
-  'css-modules',
-  'styled-components',
-  'none',
-] as const;
+export const styleTypes = ['styled-components', 'none'] as const;
 
 export type StyleType = (typeof styleTypes)[number];
 

@@ -21,9 +21,7 @@ export async function createStyledComponentsReactPackage(
   const namespace = await getNamespace(rootDir);
   const packageName = `${namespace}/${name}`;
 
-  console.log(
-    `✨ Creating Styled Components Modules React library: ${packageName}`,
-  );
+  console.log(`✨ Creating Styled Components React library: ${packageName}`);
 
   const generator = new PackageGenerator(
     directory,

@@ -14,16 +14,6 @@ describe('Button', () => {
     const buttonElement = screen.getByRole('button');
     expect(buttonElement.tagName).toBe('BUTTON');
   });
-
-  /* Note: Testing for specific CSS classes with CSS Modules is tricky 
-     because class names are mangled (e.g., _styledButton_123). 
-     Usually, we just test that the class attribute exists.
-  */
-  it('applies a class name', () => {
-    render(<Button>Styled</Button>);
-    const buttonElement = screen.getByRole('button');
-    expect(buttonElement.className).toBeTruthy();
-  });
 });
 `;
 
