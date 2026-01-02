@@ -1,40 +1,129 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Welcome to Stack
+description: Scaffold and manage high-quality TypeScript packages in a modern, opinionated monorepo.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Build reusable TypeScript packages—not just apps.
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: "#quick-start"
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/your-repo
       icon: external
-      variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
 
-## Next steps
+## WIP
+- Not all environments are supported yet.
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+## Inspired by .NET Solutions
+
+Stack is an attempt to create a predictable opinionated software system. It can create backends, frontends,
+desktop apps, mobile apps, CLI apps and reusable packages that they can share. Stack comes fully ejected — you
+always own your build and configuration. Stack helps scaffold and link packages!
+
+## 🛠 Supported Toolset
+
+Stack comes pre-configured with a modern, high-performance stack so you can focus on code, not config.
+
+<CardGrid staggered>
+  <Card title="Build with tsup" icon="setting">
+    All packages are bundled using `tsup`, powered by esbuild for blazing fast compilation.
+  </Card>
+
+  <Card title="Test with Vitest" icon="rocket">
+    Unit testing is pre-configured out of the box with `vitest` for every new package.
+  </Card>
+
+  <Card title="React & Vite" icon="list-format">
+    Generate shared React component libraries or full-stack Vite frontend applications instantly.
+  </Card>
+
+  <Card title="Backend Ready" icon="add-document">
+    Native support for Node.js libraries, CLI tools, and **Fastify** (coming soon).
+  </Card>
 </CardGrid>
+
+---
+
+
+## ⚡ Quick Start
+
+Follow these steps to get your first Stack workspace up and running in minutes.
+
+<Steps>
+1. Install the CLI
+    Manage your workspace by installing the global runner:
+
+    ```bash
+    npm install -g @stack-dev/cli
+    ```
+
+2. Create a New Workspace
+    Scaffold your entire monorepo structure:
+
+    ```bash
+    stack create my-new-project
+    ```
+
+3. Generate Your First Package
+    Navigate into your project and add a module:
+
+    ```bash
+    # Create a shared utility library
+    stack g my-utils --type library
+    ```
+</Steps>
+
+---
+
+## 🏗 Supported Project Types
+
+Use `stack g <name>` to generate different architecture patterns:
+
+| Type     | Description |
+|----------|-------------|
+| Library  | Vanilla TypeScript package with tsup & vitest |
+| React   | Component libraries with optional Styled Components support |
+| Vite    | Full React frontend static applications |
+| Fastify | *(Coming Soon)* High-performance backend API scaffolding |
+
+---
+
+## 🛠 CLI Commands Reference
+
+| Command | Alias | Description |
+|--------|-------|-------------|
+| `stack create <name>` | — | Initialize a new workspace |
+| `stack g <name>` | — | Generate a new package, app, or config |
+| `stack link [name]` | `l` | Link a local workspace package |
+| `stack unlink [name]` | `u` | Remove a local package link |
+
+---
+
+## 🔧 Development Workflow
+
+Stack leverages **pnpm workspaces** for maximum efficiency.
+
+### Project Structure
+
+- `packages/*` — Shared libraries and configuration packages
+- `apps/*` — Deployment targets (Vite apps, CLIs, etc.)
+- `tooling/*` — Shared ESLint, Prettier, and TypeScript configs
+
+### Common Scripts
+
+```bash
+# Build the entire workspace
+pnpm run build
+
+# Run in watch mode for development
+pnpm run build --watch
+
+# Smart link a package as a devDependency
+stack link @stack-dev/core --dev
