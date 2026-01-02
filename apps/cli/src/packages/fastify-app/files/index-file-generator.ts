@@ -38,7 +38,7 @@ registerRoutes();
 
 function registerRoutes() {
   fastify.get("/", async (request, reply) => {
-    return { hello: "world" };
+    return { hello: "world", docs: "/docs" };
   });
 
   fastify.get<{

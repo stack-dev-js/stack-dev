@@ -57,6 +57,7 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
       new Dependency('tsx', '^4.21.0'),
       new Dependency('eslint', '^9.32.0'),
       new Dependency('prettier', '^3.6.2'),
+      new Dependency('vitest', '^3.2.4'),
     ],
     additionalData: {
       version: '0.1.0',
@@ -68,6 +69,8 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
         start: 'node dist/index.mjs',
         lint: 'eslint .',
         format: 'prettier . --write',
+        test: 'vitest run',
+        'test:watch': 'vitest',
       },
     },
   });

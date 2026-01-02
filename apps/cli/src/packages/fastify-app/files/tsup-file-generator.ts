@@ -17,4 +17,4 @@ export default defineConfig({
 });
 `;
 
-export const TSUP_FILE_GENERATOR = new FileGeneratorImp('tsup.index.ts', TSUP);
+export const TSUP_FILE_GENERATOR = new FileGeneratorImp('tsup.config.ts', TSUP);
