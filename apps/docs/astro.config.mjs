@@ -8,7 +8,7 @@ export default defineConfig({
 	base: '/stack-dev',
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'Stack',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{
