@@ -9,7 +9,10 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Stack',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/BenMcLean981/stack-dev' }],
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/BenMcLean981/stack-dev' },
+				{ icon: 'npm', label: "NPM", href: 'https://www.npmjs.com/package/@stack-dev/cli' },
+			],
 			sidebar: [
 				{
 					label: 'Guides',
