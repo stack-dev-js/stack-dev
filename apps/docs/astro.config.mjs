@@ -9,7 +9,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Stack',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/BenMcLean981/stack-dev' }],
 			sidebar: [
 				{
 					label: 'Guides',
