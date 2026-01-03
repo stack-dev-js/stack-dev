@@ -1,6 +1,7 @@
 {
   "name": "@stack-dev/cli",
   "version": "0.2.0",
+  "license": "MIT",
   "bin": {
     "stack": "./dist/index.js"
   },
