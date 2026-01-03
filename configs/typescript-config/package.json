@@ -1,6 +1,7 @@
 {
   "name": "@stack-dev/typescript-config",
   "version": "0.1.2",
+  "license": "MIT",
   "dependencies": {
     "typescript": "^5.8.3"
   }
