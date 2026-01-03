@@ -1,10 +1,9 @@
 import { FileGeneratorImp } from '../../../../file-generator/file-generator-imp';
 
-const BUTTON = `import React from 'react';
-import * as styles from './button.module.css';
+const BUTTON = `import React, { HTMLAttributes } from 'react';
 
 export function Button(props: HTMLAttributes<HTMLButtonElement>) {
-  return <button className={styles.styledButton} {...props} />;
+  return <button {...props} />;
 }
 `;
 

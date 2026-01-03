@@ -4,19 +4,16 @@ const TSUP_CONFIG = `import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['cjs', 'esm'],
+  format: ['esm', 'cjs'],
   dts: true,
-  minify: true,
   clean: true,
-  injectStyle: true,
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'styled-components'],
   outExtension({ format }) {
     return {
       js: format === 'esm' ? '.mjs' : '.js',
     };
   },
-});
-`;
+});`;
 
 export const TSUP_CONFIG_FILE_GENERATOR = new FileGeneratorImp(
   'tsup.config.ts',
