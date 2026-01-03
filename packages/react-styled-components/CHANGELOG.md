@@ -1,5 +1,11 @@
 # @stack-dev/react-styled-components
 
+## 0.2.0
+
+### Minor Changes
+
+- 97907ee: Added MIT license
+
 ## 0.1.2
 
 ### Patch Changes

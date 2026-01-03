@@ -1,5 +1,16 @@
 # @stack-dev/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- 97907ee: Added MIT license
+
+### Patch Changes
+
+- Updated dependencies [97907ee]
+  - @stack-dev/core@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes
