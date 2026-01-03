@@ -60,26 +60,42 @@ Follow these steps to get your first Stack workspace up and running in minutes.
 
 <Steps>
 1. Install the CLI
-    Manage your workspace by installing the global runner:
 
-    ```bash
-    npm install -g @stack-dev/cli
-    ```
+Manage your workspace by installing the global runner:
+
+```bash
+npm install -g @stack-dev/cli
+```
 
 2. Create a New Workspace
-    Scaffold your entire monorepo structure:
 
-    ```bash
-    stack create my-new-project
-    ```
+Scaffold your entire monorepo structure:
+
+```bash
+stack create my-new-project
+```
 
 3. Generate Your First Package
-    Navigate into your project and add a module:
 
-    ```bash
-    # Create a shared utility library
-    stack g my-utils --type library
-    ```
+```bash
+# Create a shared utility library
+stack g my-utils --type library
+```
+
+4. Generate Your First App
+
+```bash
+# Create a vite React app
+stack g frontend --type vite
+```
+
+5. Link to Your Package
+
+```bash
+cd apps/frontend
+
+stack l @my-new-project/my-utils
+```
 </Steps>
 
 ---
