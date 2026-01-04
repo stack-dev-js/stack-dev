@@ -4,10 +4,10 @@ import { Dependency, PackageJSON } from '../../package-json';
 import { PackageGenerator } from '../../utils/package-generator';
 import { getNamespace, getWorkspaceRoot } from '../../utils/workspace';
 
-import { ESLINT_CONFIG_FILE_GENERATOR } from './files/eslint-config-file-generator';
+import { makeEslintConfigGenerator } from '../files/eslint-config-file-generator';
+import { makePrettierConfigFileGenerator } from '../files/prettier-config-file-generator';
+import { makeBaseTsconfigFileGenerator } from '../files/tsconfig-file-generator';
 import { INDEX_FILE_GENERATOR } from './files/index-file-generator';
-import { PRETTIER_CONFIG_FILE_GENERATOR } from './files/prettier-config-file-generator';
-import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
 import { TSUP_FILE_GENERATOR } from './files/tsup-file-generator';
 import { VITEST_CONFIG_FILE_GENERATOR } from './files/vitest-config-file-generator';
 
@@ -25,10 +25,10 @@ export async function createFastifyApp(name: string): Promise<void> {
     makeAppPackageGenerator(packageName, namespace),
     [
       INDEX_FILE_GENERATOR,
-      TSCONFIG_FILE_GENERATOR,
+      makeBaseTsconfigFileGenerator('tsconfig.json', namespace),
       TSUP_FILE_GENERATOR,
-      PRETTIER_CONFIG_FILE_GENERATOR,
-      ESLINT_CONFIG_FILE_GENERATOR,
+      makePrettierConfigFileGenerator('prettier.config.mjs', namespace),
+      makeEslintConfigGenerator('eslint.config.mjs', namespace),
       VITEST_CONFIG_FILE_GENERATOR,
     ],
   );
@@ -65,8 +65,10 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
       type: 'module',
       scripts: {
         dev: 'tsx watch src/index.ts',
-        build: 'tsup src/index.ts',
+        prebuild: 'pnpm check-types',
+        build: 'tsup',
         start: 'node dist/index.mjs',
+        'check-types': 'tsc --noEmit',
         lint: 'eslint .',
         format: 'prettier . --write',
         test: 'vitest run',

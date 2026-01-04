@@ -1,6 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { getNamespace } from '../utils/workspace';
+import { tryGettingNamespace } from '../utils/workspace';
+import { makeEslintConfig } from './eslint-config';
+import { makePrettierConfig } from './prettier-config';
 import { makeRootPackage } from './root-package';
 import { makeTypescriptConfig } from './typescript-config';
 
@@ -17,13 +19,15 @@ export async function createWorkspace(name: string, directory: string) {
   const PACKAGES = [
     await makeRootPackage(fullPath, name),
     await makeTypescriptConfig(fullPath, namespace),
+    await makeEslintConfig(fullPath, namespace),
+    await makePrettierConfig(fullPath, namespace),
   ];
 
   await Promise.all(PACKAGES.map((p) => p.generate()));
 
-  await fs.mkdir(path.join(fullPath, 'apps'));
-  await fs.mkdir(path.join(fullPath, 'configs'));
-  await fs.mkdir(path.join(fullPath, 'packages'));
+  await fs.mkdir(path.join(fullPath, 'apps'), { recursive: true });
+  await fs.mkdir(path.join(fullPath, 'configs'), { recursive: true });
+  await fs.mkdir(path.join(fullPath, 'packages'), { recursive: true });
 
   console.log(`✅ Workspace created at: ${fullPath}`);
   console.log('');
@@ -31,7 +35,7 @@ export async function createWorkspace(name: string, directory: string) {
 }
 
 async function validateNotInWorkspace(directory: string): Promise<void> {
-  const namespace = await getNamespace(directory);
+  const namespace = await tryGettingNamespace(directory);
 
   if (namespace !== undefined) {
     throw new Error(`Currently in workspace "${namespace}".`);
