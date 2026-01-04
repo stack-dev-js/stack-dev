@@ -8,8 +8,8 @@ import { INDEX_HTML_FILE_GENERATOR } from './files/index-html-file-generator';
 import { MAIN_FILE_GENERATOR } from './files/main-file-generator';
 import { VITE_CONFIG_FILE_GENERATOR } from './files/vite-config-file-generator';
 
+import { makeReactEslintConfigGenerator } from '../files/eslint-config-file-generator';
 import { APP_FILE_GENERATOR } from './files/app-file-generator';
-import { ESLINT_CONFIG_FILE_GENERATOR } from './files/eslint-config-file-generator';
 import { PRETTIER_CONFIG_FILE_GENERATOR } from './files/prettier-config-file-generator';
 import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
 import { VITEST_CONFIG_FILE_GENERATOR } from './files/vitest-config-file-generator';
@@ -33,7 +33,7 @@ export async function createViteReactApp(name: string): Promise<void> {
       APP_FILE_GENERATOR,
       TSCONFIG_FILE_GENERATOR,
       PRETTIER_CONFIG_FILE_GENERATOR,
-      ESLINT_CONFIG_FILE_GENERATOR,
+      makeReactEslintConfigGenerator('eslint.config.mjs', namespace),
       VITEST_CONFIG_FILE_GENERATOR,
     ],
   );

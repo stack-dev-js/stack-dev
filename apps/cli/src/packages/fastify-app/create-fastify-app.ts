@@ -4,7 +4,7 @@ import { Dependency, PackageJSON } from '../../package-json';
 import { PackageGenerator } from '../../utils/package-generator';
 import { getNamespace, getWorkspaceRoot } from '../../utils/workspace';
 
-import { ESLINT_CONFIG_FILE_GENERATOR } from './files/eslint-config-file-generator';
+import { makeEslintConfigGenerator } from '../files/eslint-config-file-generator';
 import { INDEX_FILE_GENERATOR } from './files/index-file-generator';
 import { PRETTIER_CONFIG_FILE_GENERATOR } from './files/prettier-config-file-generator';
 import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
@@ -28,7 +28,7 @@ export async function createFastifyApp(name: string): Promise<void> {
       TSCONFIG_FILE_GENERATOR,
       TSUP_FILE_GENERATOR,
       PRETTIER_CONFIG_FILE_GENERATOR,
-      ESLINT_CONFIG_FILE_GENERATOR,
+      makeEslintConfigGenerator('eslint.config.mjs', namespace),
       VITEST_CONFIG_FILE_GENERATOR,
     ],
   );
