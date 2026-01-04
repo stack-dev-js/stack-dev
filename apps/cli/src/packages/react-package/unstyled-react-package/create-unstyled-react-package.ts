@@ -90,6 +90,7 @@ function makePackageGenerator(packageName: string, namespace: string) {
       scripts: {
         build: 'tsup',
         dev: 'tsup --watch', // Helpful for local lib dev
+        'check-types': 'tsc --noEmit',
         lint: 'eslint .',
         format: 'prettier . --write',
         test: 'vitest run',

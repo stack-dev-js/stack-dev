@@ -67,6 +67,7 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
         dev: 'tsx watch src/index.ts',
         build: 'tsup src/index.ts',
         start: 'node dist/index.mjs',
+        'check-types': 'tsc --noEmit',
         lint: 'eslint .',
         format: 'prettier . --write',
         test: 'vitest run',

@@ -72,7 +72,8 @@ function makePackageGenerator(packageName: string, namespace: string) {
       },
       scripts: {
         build: 'tsup',
-        lint: 'eslint',
+        'check-types': 'tsc --noEmit',
+        lint: 'eslint .',
         format: 'prettier . --write',
         test: 'vitest run',
         'test:watch': 'vitest',

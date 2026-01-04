@@ -69,8 +69,11 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
         build: 'tsc && vite build',
         preview: 'vite preview',
         start: 'pnpm run preview',
+        'check-types': 'tsc --noEmit',
         lint: 'eslint .',
         format: 'prettier . --write',
+        test: 'vitest run',
+        'test:watch': 'vitest',
       },
     },
   });
