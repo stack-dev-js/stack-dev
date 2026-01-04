@@ -60,7 +60,8 @@ function makeAppPackageGenerator(packageName: string, namespace: string) {
       type: 'module',
       scripts: {
         dev: 'tsx watch src/index.ts',
-        build: 'tsup src/index.ts',
+        prebuild: 'pnpm check-types',
+        build: 'tsup',
         start: 'node dist/index.mjs',
         'check-types': 'tsc --noEmit',
         lint: 'eslint .',

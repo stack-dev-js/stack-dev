@@ -71,6 +71,7 @@ function makePackageGenerator(packageName: string, namespace: string) {
         },
       },
       scripts: {
+        prebuild: 'pnpm check-types',
         build: 'tsup',
         'check-types': 'tsc --noEmit',
         lint: 'eslint .',

@@ -94,6 +94,7 @@ function makePackageGenerator(packageName: string, namespace: string) {
         // Removed './index.css' as it's no longer produced by Styled Components
       },
       scripts: {
+        prebuild: 'pnpm check-types',
         build: 'tsup',
         dev: 'tsup --watch', // Helpful for local lib dev
         'check-types': 'tsc --noEmit',
