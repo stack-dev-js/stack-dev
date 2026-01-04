@@ -1,5 +1,11 @@
 # @stack-dev/cli
 
+## 0.3.1
+
+### Patch Changes
+
+- 61c03d1: Fixed bugs with workspace generation
+
 ## 0.3.0
 
 ### Minor Changes
