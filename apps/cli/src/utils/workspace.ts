@@ -61,18 +61,33 @@ export async function getWorkspaceRoot(
   return getWorkspaceRoot(parent);
 }
 
+export async function tryGettingNamespace(
+  directory: string,
+): Promise<string | undefined> {
+  try {
+    const root = await getWorkspaceRoot(directory);
+    const packageJson = await getDirectoryPackageJson(root);
+
+    const result = packageJson.name;
+
+    if (!result) {
+      return undefined;
+    } else {
+      return `@${result}`;
+    }
+  } catch (e) {
+    return undefined;
+  }
+}
+
 export async function getNamespace(
   directory: string = process.cwd(),
 ): Promise<string> {
-  const root = await getWorkspaceRoot(directory);
+  const namespace = await tryGettingNamespace(directory);
 
-  const packageJson = await getDirectoryPackageJson(root);
-
-  const result = packageJson.name;
-
-  if (!result) {
-    throw new Error('Missing name.');
+  if (!namespace) {
+    throw new Error('Missing namespace.');
   }
 
-  return `@${result}`;
+  return namespace;
 }
