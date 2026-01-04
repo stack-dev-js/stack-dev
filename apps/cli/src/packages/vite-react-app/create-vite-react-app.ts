@@ -10,8 +10,8 @@ import { VITE_CONFIG_FILE_GENERATOR } from './files/vite-config-file-generator';
 
 import { makeReactEslintConfigGenerator } from '../files/eslint-config-file-generator';
 import { makePrettierConfigFileGenerator } from '../files/prettier-config-file-generator';
+import { makeReactTsconfigFileGenerator } from '../files/tsconfig-file-generator';
 import { APP_FILE_GENERATOR } from './files/app-file-generator';
-import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
 import { VITEST_CONFIG_FILE_GENERATOR } from './files/vitest-config-file-generator';
 
 export async function createViteReactApp(name: string): Promise<void> {
@@ -31,7 +31,7 @@ export async function createViteReactApp(name: string): Promise<void> {
       INDEX_HTML_FILE_GENERATOR,
       MAIN_FILE_GENERATOR,
       APP_FILE_GENERATOR,
-      TSCONFIG_FILE_GENERATOR,
+      makeReactTsconfigFileGenerator('tsconfig.json', namespace),
       makePrettierConfigFileGenerator('prettier.config.mjs', namespace),
       makeReactEslintConfigGenerator('eslint.config.mjs', namespace),
       VITEST_CONFIG_FILE_GENERATOR,

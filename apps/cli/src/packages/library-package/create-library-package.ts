@@ -6,10 +6,10 @@ import { Dependency, PackageJSON } from '../../package-json';
 import { PackageGenerator } from '../../utils/package-generator';
 import { makeEslintConfigGenerator } from '../files/eslint-config-file-generator';
 import { makePrettierConfigFileGenerator } from '../files/prettier-config-file-generator';
+import { makeBaseTsconfigFileGenerator } from '../files/tsconfig-file-generator';
 import { ADD_FILE_GENERATOR } from './files/add-file-generator';
 import { ADD_SPEC_FILE_GENERATOR } from './files/add-spec-file-generator';
 import { INDEX_FILE_GENERATOR } from './files/index-file-generator';
-import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
 import { TSUP_CONFIG_FILE_GENERATOR } from './files/tsup-config-file-generator';
 import { VITEST_CONFIG_FILE_GENERATOR } from './files/vitest-config-file-generator';
 
@@ -30,7 +30,7 @@ export async function createLibraryPackage(name: string): Promise<void> {
       ADD_FILE_GENERATOR,
       ADD_SPEC_FILE_GENERATOR,
       TSUP_CONFIG_FILE_GENERATOR,
-      TSCONFIG_FILE_GENERATOR,
+      makeBaseTsconfigFileGenerator('tsconfig.json', namespace),
       makePrettierConfigFileGenerator('prettier.config.mjs', namespace),
       makeEslintConfigGenerator('eslint.config.mjs', namespace),
       VITEST_CONFIG_FILE_GENERATOR,
