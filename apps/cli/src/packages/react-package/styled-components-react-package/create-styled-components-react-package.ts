@@ -4,10 +4,10 @@ import { Dependency, PackageJSON } from '../../../package-json';
 import { PackageGenerator } from '../../../utils/package-generator';
 import { getNamespace, getWorkspaceRoot } from '../../../utils/workspace';
 import { makeReactEslintConfigGenerator } from '../../files/eslint-config-file-generator';
+import { makePrettierConfigFileGenerator } from '../../files/prettier-config-file-generator';
 import { BUTTON_FILE_GENERATOR } from './files/button-file-generator';
 import { BUTTON_SPEC_FILE_GENERATOR } from './files/button-spec-file-generator';
 import { INDEX_FILE_GENERATOR } from './files/index-file-generator';
-import { PRETTIER_CONFIG_FILE_GENERATOR } from './files/prettier-config-file-generator';
 import { TSCONFIG_FILE_GENERATOR } from './files/tsconfig-file-generator';
 import { TSUP_CONFIG_FILE_GENERATOR } from './files/tsup-config-file-generator';
 import { VITEST_CONFIG_FILE_GENERATOR } from './files/vitest-config-file-generator';
@@ -32,7 +32,7 @@ export async function createStyledComponentsReactPackage(
       BUTTON_SPEC_FILE_GENERATOR,
       TSUP_CONFIG_FILE_GENERATOR,
       TSCONFIG_FILE_GENERATOR,
-      PRETTIER_CONFIG_FILE_GENERATOR,
+      makePrettierConfigFileGenerator('prettier.config.mjs', namespace),
       makeReactEslintConfigGenerator('eslint.config.mjs', namespace),
       VITEST_CONFIG_FILE_GENERATOR,
     ],
