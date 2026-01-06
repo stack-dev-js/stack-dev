@@ -74,18 +74,17 @@ function makePackageGenerator(packageName: string, namespace: string) {
     additionalData: {
       version: '0.1.0',
       private: true,
-      type: 'module', // Added this to ensure ESM consistency
+      type: 'module',
       main: 'dist/index.js',
       module: 'dist/index.mjs',
       types: 'dist/index.d.ts',
       exports: {
         '.': {
           development: './src/index.ts',
+          types: './dist/index.d.ts',
           import: './dist/index.mjs',
           require: './dist/index.js',
-          types: './dist/index.d.ts',
         },
-        // Removed './index.css' as it's no longer produced by Styled Components
       },
       scripts: {
         prebuild: 'pnpm check-types',
