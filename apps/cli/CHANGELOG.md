@@ -1,5 +1,11 @@
 # @stack-dev/cli
 
+## 0.3.3
+
+### Patch Changes
+
+- 68fb47b: Fixed package.json generation.
+
 ## 0.3.2
 
 ### Patch Changes
