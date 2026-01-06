@@ -53,7 +53,7 @@ This workspace is organized as follows:
 
 - `packages/*`: Shared libraries and configuration packages.
 - `apps/*`: Deployment targets such as Vite apps, CLIs, etc.
-- `tooling/*`: Shared ESLint, Prettier, and TypeScript configuration files.
+- `configs/*`: Shared ESLint, Prettier, and TypeScript configuration files.
 
 ---
 
