@@ -1,6 +1,8 @@
 {
   "name": "stack-dev",
   "version": "0.1.0",
+  "homepage": "https://github.com/BenMcLean981/stack-dev#readme",
+  "repository": "github:BenMcLean981/stack-dev",
   "description": "",
   "keywords": [],
   "author": "",
