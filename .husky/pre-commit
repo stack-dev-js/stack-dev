@@ -1,1 +1,7 @@
+# .husky/pre-commit
+
 pnpm sync-readme
+pnpm sync-license
+
+git add **/LICENSE
+git add **/README.md
