@@ -1,5 +1,11 @@
 # @stack-dev/react-styled-components
 
+## 0.2.1
+
+### Patch Changes
+
+- 45ab108: Added License
+
 ## 0.2.0
 
 ### Minor Changes

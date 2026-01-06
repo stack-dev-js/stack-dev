@@ -1,5 +1,13 @@
 # @stack-dev/cli
 
+## 0.3.2
+
+### Patch Changes
+
+- 45ab108: Added License
+- Updated dependencies [45ab108]
+  - @stack-dev/core@0.2.1
+
 ## 0.3.1
 
 ### Patch Changes
