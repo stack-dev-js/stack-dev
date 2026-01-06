@@ -5,7 +5,7 @@
 "@stack-dev/eslint-config": patch
 "@stack-dev/react-css": patch
 "@stack-dev/core": patch
-"docs": patch
+"@stack-dev/docs": patch
 "@stack-dev/cli": patch
 ---
 
