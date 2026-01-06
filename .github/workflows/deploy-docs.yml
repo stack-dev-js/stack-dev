@@ -31,7 +31,7 @@ jobs:
 
       - name: Build with Turbo
         # This builds the docs and all its local dependencies
-        run: pnpm turbo run build --filter=docs
+        run: pnpm turbo run build --filter=@stack-dev/docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
